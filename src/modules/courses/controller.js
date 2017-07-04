@@ -16,6 +16,9 @@ export async function createCourse (ctx) {
 }
 
 export async function getCourses (ctx) {
-  const courses = await Course.find({}).populate('instructor')
+  const {date} = ctx.request.query
+  let where = {}
+  if (date) where.date = date
+  const courses = await Course.find(where).populate('instructor')
   ctx.body = { courses }
 }
