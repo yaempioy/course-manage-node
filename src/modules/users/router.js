@@ -37,6 +37,15 @@ export default [
     ]
   },
   {
+    method: 'PUT',
+    route: '/birthdate/:id',
+    handlers: [
+      ensureUser,
+      user.getUser,
+      user.updateBirthDate
+    ]
+  },
+  {
     method: 'DELETE',
     route: '/:id',
     handlers: [

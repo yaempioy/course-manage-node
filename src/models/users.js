@@ -5,10 +5,14 @@ import jwt from 'jsonwebtoken'
 
 const User = new mongoose.Schema({
   type: { type: String, default: 'User' },
-  name: { type: String },
+  firstname: { type: String },
+  lastname: { type: String },
+  nickname: { type: String },
+  birthday: {type: Date},
+  gender: {type: String, enum: ['M', 'W']},
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true }
-})
+}, {timestamps: true, versionKey: false})
 
 User.pre('save', function preSave (next) {
   const user = this
