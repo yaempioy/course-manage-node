@@ -4,7 +4,7 @@ import config from '../../config'
 import jwt from 'jsonwebtoken'
 
 const User = new mongoose.Schema({
-  type: { type: String, default: 'User' },
+  type: { type: String, enum: ['Student', 'Instructor'] },
   firstname: { type: String },
   lastname: { type: String },
   nickname: { type: String },
