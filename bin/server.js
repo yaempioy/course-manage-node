@@ -1,4 +1,5 @@
 import Koa from 'koa'
+import KoaCors from 'kcors'
 import bodyParser from 'koa-bodyparser'
 import convert from 'koa-convert'
 import logger from 'koa-logger'
@@ -10,11 +11,16 @@ import config from '../config'
 import { errorMiddleware } from '../src/middleware'
 
 const app = new Koa()
+const cors = KoaCors({
+  allowMethods: ['GET', 'HEAD', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+  maxAge: 3600 * 5
+})
 app.keys = [config.session]
 
 mongoose.Promise = global.Promise
 mongoose.connect(config.database)
 
+app.use(cors)
 app.use(convert(logger()))
 app.use(bodyParser())
 app.use(session())
